@@ -1,0 +1,2 @@
+# RAG-QA
+https://www.youtube.com/watch?v=rz40ukZ3krQ
