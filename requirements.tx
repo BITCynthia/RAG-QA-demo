@@ -1,0 +1,5 @@
+langchain
+langchain_community
+langchain-openai
+tesseract-ocr
+unstructured[pdf]
