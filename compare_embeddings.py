@@ -9,7 +9,7 @@ def main():
     print(f"Vector length: {len(vector)}")
 
     evaluator = load_evaluator(evaluator = "pairwise_embedding_distance", embeddings=embedding_function)
-    words = ("apple", "iphone")
+    words = ("apple", "apple")
     x = evaluator.evaluate_string_pairs(prediction = words[0], prediction_b=words[1])
     print(f"Comparing ({words[0]}, {words[1]}: {x})")
     

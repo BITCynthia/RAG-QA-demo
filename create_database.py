@@ -18,8 +18,8 @@ def load_docments(DATA_PATH):
 
 def split_text(docments: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=500,
+        chunk_size=300,
+        chunk_overlap=100,
         length_function=len,
         add_start_index=True
     )
