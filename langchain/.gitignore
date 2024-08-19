@@ -1,0 +1,4 @@
+rag/chroma/
+rag/documents/
+constants/secrets.json
+__pycache__/
