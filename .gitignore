@@ -1,1 +1,3 @@
-constants/
+rag/chroma/
+rag/constants/
+rag/documents/
