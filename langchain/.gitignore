@@ -1,4 +1,6 @@
+rag/agent/constants/secrets.json
 rag/chroma/
 rag/documents/
-constants/secrets.json
-__pycache__/
+rag-pipeline/data/
+rag-pipeline/agent/constants/secrets.json
+rag-pipeline/chroma/
