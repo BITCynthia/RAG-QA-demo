@@ -47,6 +47,28 @@ class Database():
         return db
 
     def updata_database(self, db, chunks):
+        def calculate_chunk_ids(chunks):
+            # ID format: page_source:page number:chunk index
+            last_page_id = None
+            current_page_index = 0
+
+            for chunk in chunks:
+                source = chunk.metadata.get("source")
+                page = chunk.metadata.get("page")
+                current_page_id = f"{source}:{page}"
+
+                if current_page_id == last_page_id:
+                    current_page_index += 1
+                else:
+                    current_page_index = 0 # new page
+
+                chunk_id = f"{current_page_id}:{current_page_index}"
+                last_page_id = current_page_id
+
+                chunk.metadata["id"] = chunk_id
+
+            return chunks
+
         def find_new_chunks():
             new_chunks = []
             for chunk in chunks_with_ids:
@@ -60,42 +82,20 @@ class Database():
             db.persist()
 
         existing_ids = set(db.get(include=[])["ids"])
-        logger.note(f"Number of existing documents in DB: {len(existing_ids)}")
+        logger.mesg(f"Number of existing documents in DB: {len(existing_ids)}")
 
-        chunks_with_ids = self.calculate_chunk_ids(chunks)
+        chunks_with_ids = calculate_chunk_ids(chunks)
         new_chunks = find_new_chunks()
 
         if len(new_chunks):
-            logger.note(f"Adding new documents: {len(new_chunks)}")
+            logger.mesg(f"Adding new documents: {len(new_chunks)}")
             updata_schema()
         else:
-            logger.note(f"No new documents to add.")
+            logger.mesg(f"No new documents to add.")
 
-    def calculate_chunk_ids(self, chunks):
-        # ID format: page_source:page number:chunk index
-        last_page_id = None
-        current_page_index = 0
-
-        for chunk in chunks:
-            source = chunk.metadata.get("source")
-            page = chunk.metadata.get("page")
-            current_page_id = f"{source}:{page}"
-
-            if current_page_id == last_page_id:
-                current_page_index += 1
-            else:
-                current_page_index = 0 # new page
-
-            chunk_id = f"{current_page_id}:{current_page_index}"
-            last_page_id = current_page_id
-
-            chunk.metadata["id"] = chunk_id
-
-        return chunks
-    
 if __name__ == "__main__":
-    data_path = os.path.abspath('data/pdf')
-    chroma_path = os.path.abspath('langchain/rag-pipeline/chroma')
-    print(data_path)
-    print(chroma_path)
+    file_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_path = os.path.abspath('../data/pdf')
+    chroma_path = os.path.abspath('rag-pipeline/chroma')
+    logger.note(f"> Extracting docs in {data_path} into datase {chroma_path}")
     Database(data_path, chroma_path, reset = False)
