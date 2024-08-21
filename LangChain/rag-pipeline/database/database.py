@@ -22,7 +22,7 @@ class Database():
         self.updata_database(database, chunks)
 
     def clear_database(self, chroma_path):
-        if os.path.exist(chroma_path):
+        if os.path.exists(chroma_path):
             shutil.rmtree(chroma_path)
 
     def load_from_pdf(self, data_path):
