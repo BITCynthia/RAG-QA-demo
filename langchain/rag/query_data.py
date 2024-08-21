@@ -3,7 +3,7 @@ from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate
 
 from agent.embedding import OpenAIEmbedding
-from agent.chat import OpenAIClient
+from agent.chat import OpenAIChat
 
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
@@ -28,13 +28,13 @@ def make_prompt(results, query_text):
     return prompt
 
 def get_response(prompt):
-    model = OpenAIClient().get_model()
-    response = model.predict(prompt)
-    formatted_response = f"Response: {response}\n"
+    model = OpenAIChat().get_model()
+    response = model.invoke(prompt)
+    formatted_response = f"Response: {response.content}\n"
     return formatted_response
 
 def main():
-    CHROMA_PATH = "chroma"
+    CHROMA_PATH = "rag/chroma"
 
     args = parse_args()
     query_text = args.query

@@ -1,6 +1,4 @@
 rag/agent/constants/secrets.json
 rag/chroma/
-rag/documents/
-rag-pipeline/data/
 rag-pipeline/agent/constants/secrets.json
 rag-pipeline/chroma/

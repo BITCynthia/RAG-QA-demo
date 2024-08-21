@@ -45,12 +45,13 @@ def save_to_chroma(chunks, CHROMA_PATH):
     print(f"Save {len(chunks)} chunks to {CHROMA_PATH}")
 
 def main():
-    DATA_PATH = "documents/"
-    CHROMA_PATH = "chroma"
+    DATA_PATH = os.path.abspath('../data/alice_in_wonderland')
+    CHROMA_PATH = os.path.abspath('rag/chroma')
+    print(CHROMA_PATH)
 
-    docments = load_docments(DATA_PATH)
-    chunks = split_text(docments)
-    save_to_chroma(chunks, CHROMA_PATH)
+    # docments = load_docments(DATA_PATH)
+    # chunks = split_text(docments)
+    # save_to_chroma(chunks, CHROMA_PATH)
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,4 @@
-from constants import OPENAI_EMBEDDING_ENVS
+from .constants import OPENAI_EMBEDDING_ENVS
 
 from langchain_openai import AzureOpenAIEmbeddings, OpenAIEmbeddings
 
